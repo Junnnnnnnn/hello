@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-<c:set var="picPath" value="http://127.0.0.1:8003/ssmImage19"></c:set>
+<c:set var="picPath" value="http://127.0.0.1:8003/ssmImage"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,28 +15,24 @@ function submitImgSize1Upload(){
 	
 	
 	var option={
-			type:'POST',
-			url:'${pageContext.request.contextPath }/upload/uploadPic.do',
+		type:'POST',
+			url:'${pageContext.request.contextPath }/rest/upload/uploadPic.do',
 			dataType:'text',
 			data:{
-				fileName : 'imgSize1File'
+				fileName:'imgSize1File'
 			},
 			success:function(data){
-				
-				//把json格式的字符串转换成json对象
-				var jsonObj = $.parseJSON(data);
-				
-				//返回服务器图片路径，把图片路径设置给img标签
+				var jsonObj=$.parseJSON(data);
 				$("#imgSize1ImgSrc").attr("src",jsonObj.fullPath);
-				//数据库保存相对路径
 				$("#imgSize1").val(jsonObj.relativePath);
 			}
-			
-		};
-	
+	};
+		
 	$("#itemForm").ajaxSubmit(option);
 	
 }
+	
+
 </script>
 
 </head>
